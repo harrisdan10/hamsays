@@ -17,7 +17,7 @@ public class HAMApp {
         welcome();
         String name = promptForName();
         startGame(name);
-        promptForColor();
+//        promptForColor();
         gameOver(name);
     }
 
