@@ -7,21 +7,11 @@ import java.util.*;
 public class Board {
     private List<Player> player;
     private final List<Colors> colorsList = new ArrayList<>();
-    private final List<Colors> playerInput = new ArrayList<>();
+    private List<Colors> playerInput;
     Prompter prompter = new Prompter(new Scanner(System.in));
 
     public void display(){
-//        getRandomColor();
-//        promptForColor();
-        checkInput();
-        //gameover
-    }
-
-    public void checkInput() {
-        while (colorsList.equals(playerInput)) {
-            getRandomColor();
-            promptForColor();
-        }
+        getRandomColor();
     }
 
     //Aaron
@@ -34,9 +24,8 @@ public class Board {
     }
 
     //Harris
-    private List<Colors> promptForColor() {
-//        List<Colors> playerInput = new ArrayList<>();
-//        List<Colors> playerInput =
+    public List<Colors> promptForColor() {
+        playerInput = new ArrayList<>();
 
         String error = "Please choose between one of the four colors: "
                 + "[" + Colors.BLUE + ", "
@@ -70,7 +59,7 @@ public class Board {
             }
         }
         System.out.println(playerInput);
-//        return List<Colors> playerCheck = playerInput;
         return playerInput;
     }
+
 }
