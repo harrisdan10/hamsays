@@ -6,35 +6,36 @@ import java.util.*;
 
 public class Board {
     private List<Player> player;
-    private final List<Colors> colorsList = new ArrayList<>();
-    private List<Colors> playerInput;
+    private final List<Color> colorList = new ArrayList<>();
+    private List<Color> playerInput;
     Prompter prompter = new Prompter(new Scanner(System.in));
+
 
     public void display(){
         getRandomColor();
     }
 
     //Aaron
-    public List<Colors> getRandomColor() {
-        int color = new Random().nextInt(Colors.values().length);
-        Colors newColor = Colors.values()[color];
-        colorsList.add(newColor);
-        System.out.println(colorsList);
-        return colorsList;
+    public List<Color> getRandomColor() {
+        int color = new Random().nextInt(Color.values().length);
+        Color newColor = Color.values()[color];
+        colorList.add(newColor);
+        System.out.println(colorList);
+        return colorList;
     }
 
     //Harris
-    public List<Colors> promptForColor() {
+    public List<Color> promptForColor() {
         playerInput = new ArrayList<>();
 
         String error = "Please choose between one of the four colors: "
-                + "[" + Colors.BLUE + ", "
-                + Colors.RED + ","
-                + Colors.GREEN + ","
-                + Colors.YELLOW + "]";
+                + "[" + Color.BLUE + ", "
+                + Color.RED + ","
+                + Color.GREEN + ","
+                + Color.YELLOW + "]";
 
         String colors = prompter.prompt("Please enter the color(s) " +
-                        "that were displayed: ", "(G|g|R|r|B|b|Y|y)*?",
+                        "that were displayed: ", "(G|g|R|r|B|b|Y|y)*",
                 error);
 
         char [] color = colors.toUpperCase().toCharArray();
@@ -42,24 +43,36 @@ public class Board {
         for (char c : color) {
             switch (c) {
                 case 'G':
-                    playerInput.add(Colors.GREEN);
+                    playerInput.add(Color.GREEN);
                     break;
                 case 'R':
-                    playerInput.add(Colors.RED);
+                    playerInput.add(Color.RED);
                     break;
                 case 'B':
-                    playerInput.add(Colors.BLUE);
+                    playerInput.add(Color.BLUE);
                     break;
                 case 'Y':
-                    playerInput.add(Colors.YELLOW);
+                    playerInput.add(Color.YELLOW);
                     break;
                 default:
-                    System.out.println(playerInput);
                     break;
             }
         }
         System.out.println(playerInput);
         return playerInput;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(colorList, playerInput);
+    }
+    @Override
+    public boolean equals(Object obj){
+        boolean result = false;
+        if(obj instanceof Color){
+            result = Objects.equals(colorList, playerInput);
+        }
+        return result;
     }
 
 }
