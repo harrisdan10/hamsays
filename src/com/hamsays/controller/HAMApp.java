@@ -7,7 +7,6 @@ import com.hamsays.Colors;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class HAMApp {
@@ -16,10 +15,10 @@ public class HAMApp {
     
     public void execute() {
         welcome();
-        promptForName();
-        startGame(promptForName());
+        String name = promptForName();
+        startGame(name);
         promptForColor();
-        gameOver(promptForName());
+        gameOver(name);
     }
 
 
@@ -57,10 +56,10 @@ public class HAMApp {
                 + Colors.YELLOW + "]";
 
         String colors = prompter.prompt("Please enter the color(s) " +
-                "that were displayed: ", "(G|R|B|Y)*?",
-                error).toUpperCase(Locale.ROOT);
+                "that were displayed: ", "(G|g|R|r|B|b|Y|y)*?",
+                error);
 
-        char [] color = colors.toCharArray();
+        char [] color = colors.toUpperCase().toCharArray();
 
         for (char c : color) {
             switch (c) {
@@ -79,7 +78,6 @@ public class HAMApp {
                 default:
                     System.out.println(colorsList);
                     break;
-
         }
         }
         System.out.println(colorsList);
@@ -91,12 +89,5 @@ public class HAMApp {
         // if promptForColor != displayColor game will end
         // if reach success count we congratulate
     }
-
-
-
-
-
-
-
 
 }
