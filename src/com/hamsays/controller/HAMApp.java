@@ -3,11 +3,9 @@ package com.hamsays.controller;
 import com.apps.util.Console;
 import com.apps.util.Prompter;
 import com.hamsays.Board;
-import com.hamsays.Colors;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+
 
 public class HAMApp {
     private Board board = new Board();
@@ -17,7 +15,6 @@ public class HAMApp {
         welcome();
         String name = promptForName();
         startGame(name);
-//        promptForColor();
         gameOver(name);
     }
 
@@ -41,57 +38,30 @@ public class HAMApp {
     private void startGame(String name) {
         System.out.println("Let's begin " + name);
 
-        displayColor();
+        while(!gameOver(name)){
+            if(board.getRandomColor() == board.promptForColor()){
+                displayColor();
+                board.promptForColor();
+            }
+        }
     }
 
     private void displayColor() {
-        //access random color array from Board
-        //board.show();
         board.display();
     }
 
-    private List<Colors> promptForColor() {
-        List<Colors> colorsList = new ArrayList<>();
 
-        String error = "Please choose between one of the four colors: "
-                + "[" + Colors.BLUE + ", "
-                + Colors.RED + ","
-                + Colors.GREEN + ","
-                + Colors.YELLOW + "]";
+    private boolean gameOver(String name) {
+        boolean isOver = false;
 
-        String colors = prompter.prompt("Please enter the color(s) " +
-                "that were displayed: ", "(G|g|R|r|B|b|Y|y)*?",
-                error);
-
-        char [] color = colors.toUpperCase().toCharArray();
-
-        for (char c : color) {
-            switch (c) {
-                case 'G':
-                    colorsList.add(Colors.GREEN);
-                    break;
-                case 'R':
-                    colorsList.add(Colors.RED);
-                    break;
-                case 'B':
-                    colorsList.add(Colors.BLUE);
-                    break;
-                case 'Y':
-                    colorsList.add(Colors.YELLOW);
-                    break;
-                default:
-                    System.out.println(colorsList);
-                    break;
-        }
-        }
-        System.out.println(colorsList);
-        return colorsList;
-    }
-
-
-    private void gameOver(String name) {
+//        if()
+//        {
+//            isOver = true;
+//            System.out.println("Sorry, game over");
+//        }
         // if promptForColor != displayColor game will end
         // if reach success count we congratulate
+        return isOver;
     }
 
 }
