@@ -21,7 +21,11 @@ public class HAMApp {
 
     private void welcome() {
         Console.blankLines(2);
-        System.out.println("W E L C O M E  T O  H A M  S A Y S ! ! !");
+        System.out.println("o       o o--o o      o-o  o-o  o   o o--o     o-O-o  o-o      o  o   O  o   o      o-o    O  o   o  o-o\n" +
+                "|       | |    |     /    o   o |\\ /| |          |   o   o     |  |  / \\ |\\ /|     |      / \\  \\ /  |\n" +
+                "o   o   o O-o  |    O     |   | | O | O-o        |   |   |     O--O o---o| O |      o-o  o---o  O    o-o\n" +
+                " \\ / \\ /  |    |     \\    o   o |   | |          |   o   o     |  | |   ||   |         | |   |  |       |\n" +
+                "  o   o   o--o O---o  o-o  o-o  o   o o--o       o    o-o      o  o o   oo   o     o--o  o   o  o   o--o");
         Console.blankLines(2);
     }
 
