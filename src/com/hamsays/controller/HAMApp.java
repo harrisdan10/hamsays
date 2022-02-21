@@ -4,6 +4,7 @@ import com.apps.util.Console;
 import com.apps.util.Prompter;
 import com.hamsays.Board;
 import com.hamsays.Colors;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -43,6 +44,7 @@ public class HAMApp {
     private void displayColor() {
         //access random color array from Board
         //board.show();
+        board.display();
     }
 
     private List<Colors> promptForColor() {
