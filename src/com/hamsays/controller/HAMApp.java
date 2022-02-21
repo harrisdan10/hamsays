@@ -7,15 +7,15 @@ import com.hamsays.Board;
 import java.util.Scanner;
 
 
-public class HAMApp {
+public class HAMApp{
     private Board board = new Board();
     Prompter prompter = new Prompter(new Scanner(System.in));
     
     public void execute() {
         welcome();
         String name = promptForName();
-        startGame(name);
-        gameOver(name);
+        startGame();
+//        gameOver();
     }
 
 
@@ -35,13 +35,18 @@ public class HAMApp {
         return name;
     }
 
-    private void startGame(String name) {
-        System.out.println("Let's begin " + name);
+    private void startGame() {
+        System.out.println("Let's begin!");
+        boolean gameOver = false;
 
-        while(!gameOver(name)){
-            if(board.getRandomColor() == board.promptForColor()){
+        while (!gameOver) {
+            if (board.getRandomColor().equals(board.promptForColor())) {
                 displayColor();
                 board.promptForColor();
+            }
+            else{
+                gameOver = true;
+                System.out.println("Sorry Game over");
             }
         }
     }
@@ -51,17 +56,19 @@ public class HAMApp {
     }
 
 
-    private boolean gameOver(String name) {
-        boolean isOver = false;
-
-//        if()
+//    private boolean gameOver() {
+//        boolean isOver = false;
+//
+//        if ((board.getRandomColor().equals(board.promptForColor())))
 //        {
+//            System.out.println("Sorry, game over");
+//        }
+//        else{
 //            isOver = true;
 //            System.out.println("Sorry, game over");
 //        }
-        // if promptForColor != displayColor game will end
-        // if reach success count we congratulate
-        return isOver;
-    }
+//
+//        return isOver;
+//    }
 
 }
