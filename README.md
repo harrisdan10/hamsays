@@ -6,7 +6,8 @@
 ### // Game Description // 
 - A simple memory game similar to the game "Simon". 
 - There are 4 colors (Red, Green, Yellow, Blue)
-- 
+- They will be sequentially listed in a random order. 
+- When the player gets past the 10th stage then they have won.
 
 <br />
 
