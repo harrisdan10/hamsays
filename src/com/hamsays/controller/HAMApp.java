@@ -3,19 +3,23 @@ package com.hamsays.controller;
 import com.apps.util.Console;
 import com.apps.util.Prompter;
 import com.hamsays.Board;
+import com.hamsays.BoardFactory;
+import com.hamsays.Difficulty;
 
 import java.util.Scanner;
 
 
 public class HAMApp{
-    private Board board = new Board();
+    private Board board;
+    private Difficulty level;
     Prompter prompter = new Prompter(new Scanner(System.in));
     
     public void execute() {
         welcome();
-        String name = promptForName();
+        promptForName();
+        Difficulty level = promptForDifficulty();
+        board = BoardFactory.createBoard(level);
         startGame();
-//        gameOver();
     }
 
 
@@ -35,45 +39,28 @@ public class HAMApp{
         return name;
     }
 
+    private Difficulty promptForDifficulty() {
+        String difficulty = prompter.prompt("Please choose from one of the following difficulties: " +
+                "[E]asy, [M]edium, [H]ard: ", "E|M|H", "Please choose a valid difficulty " +
+                "level: [E]asy, [M]edium, [H]ard");
+
+        switch(difficulty) {
+            case "E":
+                level = Difficulty.EASY;
+                break;
+            case "M":
+                level = Difficulty.MEDIUM;
+                break;
+            case "H":
+                level = Difficulty.HARD;
+                break;
+            default:
+                break;
+        }
+        return level;
+    }
+
     private void startGame() {
-            board.gameSequence();
-
-        /*
-        System.out.println("Let's begin!");
-        boolean gameOver = false;
-
-        while (!gameOver) {
-            if (board.getRandomColor().equals(board.promptForColor())) {
-                displayColor();
-                board.promptForColor();
-            }
-            else{
-                gameOver = true;
-                System.out.println("Sorry Game over");
-            }
-        }
-         */
+        board.gameSequence();
     }
-
-    private void displayColor() {
-        board.display();
-    }
-
-   /*
-   private boolean gameOver() {
-        boolean isOver = false;
-
-        if ((board.getRandomColor().equals(board.promptForColor())))
-        {
-            System.out.println("Sorry, game over");
-        }
-        else{
-            isOver = true;
-            System.out.println("Sorry, game over");
-        }
-
-        return isOver;
-    }
-    */
-
 }
