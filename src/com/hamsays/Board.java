@@ -6,13 +6,14 @@ import com.apps.util.Prompter;
 import java.util.*;
 
 public abstract class Board extends Thread{
+
     private final List<Color> colorList = new ArrayList<>();
     private List<Color> playerInput;
     Prompter prompter = new Prompter(new Scanner(System.in));
+    private boolean gameOver = false;
 
     public abstract void display();
 
-    //Aaron
     public List<Color> getRandomColor() {
         int color = new Random().nextInt(Color.values().length);
         Color newColor = Color.values()[color];
@@ -21,7 +22,6 @@ public abstract class Board extends Thread{
         return colorList;
     }
 
-    //Harris
     public List<Color> promptForColor() {
         playerInput = new ArrayList<>();
 
@@ -59,23 +59,26 @@ public abstract class Board extends Thread{
     }
 
     public void gameSequence() {
-        boolean gameOver = false;
-        int incorrect = 0;
-        int correct = 0;
+        int correctCount = 0;
 
         display();
         promptForColor();
 
         while (!gameOver) {
             if (colorList.equals(playerInput)) {
-                display();
-                promptForColor();
-            }
-            else {
+                correctCount++;
+                if (correctCount == 10) {
+                    gameOver = true;
+                    System.out.println("Good Job you got all " + correctCount + " correct");
+                } else {
+                    display();
+                    promptForColor();
+                }
+            } else {
                 gameOver = true;
-                System.out.println("Sorry Game over");
+                Console.clear();
+                System.out.println("Sorry Game over, you got " + correctCount + " correct." );
             }
         }
     }
-
 }

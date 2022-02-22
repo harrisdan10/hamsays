@@ -62,5 +62,6 @@ public class HAMApp{
 
     private void startGame() {
         board.gameSequence();
+
     }
 }
