@@ -36,6 +36,9 @@ public class HAMApp{
     }
 
     private void startGame() {
+            board.gameSequence();
+
+        /*
         System.out.println("Let's begin!");
         boolean gameOver = false;
 
@@ -49,26 +52,28 @@ public class HAMApp{
                 System.out.println("Sorry Game over");
             }
         }
+         */
     }
 
     private void displayColor() {
         board.display();
     }
 
+   /*
+   private boolean gameOver() {
+        boolean isOver = false;
 
-//    private boolean gameOver() {
-//        boolean isOver = false;
-//
-//        if ((board.getRandomColor().equals(board.promptForColor())))
-//        {
-//            System.out.println("Sorry, game over");
-//        }
-//        else{
-//            isOver = true;
-//            System.out.println("Sorry, game over");
-//        }
-//
-//        return isOver;
-//    }
+        if ((board.getRandomColor().equals(board.promptForColor())))
+        {
+            System.out.println("Sorry, game over");
+        }
+        else{
+            isOver = true;
+            System.out.println("Sorry, game over");
+        }
+
+        return isOver;
+    }
+    */
 
 }
