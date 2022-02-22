@@ -3,17 +3,22 @@ package com.hamsays.controller;
 import com.apps.util.Console;
 import com.apps.util.Prompter;
 import com.hamsays.Board;
+import com.hamsays.BoardFactory;
+import com.hamsays.Difficulty;
 
 import java.util.Scanner;
 
 
 public class HAMApp{
-    private Board board = new Board();
+    private Board board;
+    private Difficulty level;
     Prompter prompter = new Prompter(new Scanner(System.in));
     
     public void execute() {
         welcome();
-        String name = promptForName();
+        promptForName();
+        Difficulty level = promptForDifficulty();
+        board = BoardFactory.createBoard(level);
         startGame();
     }
 
@@ -34,11 +39,29 @@ public class HAMApp{
         return name;
     }
 
-    private void startGame() {
-            board.gameSequence();
+    private Difficulty promptForDifficulty() {
+        String difficulty = prompter.prompt("Please choose from one of the following difficulties: " +
+                "[E]asy, [M]edium, [H]ard: ", "E|M|H", "Please choose a valid difficulty " +
+                "level: [E]asy, [M]edium, [H]ard");
+
+        switch(difficulty) {
+            case "E":
+                level = Difficulty.EASY;
+                break;
+            case "M":
+                level = Difficulty.MEDIUM;
+                break;
+            case "H":
+                level = Difficulty.HARD;
+                break;
+            default:
+                break;
+        }
+        return level;
     }
 
-    private void displayColor() {
-        board.display();
+    private void startGame() {
+        board.gameSequence();
+
     }
 }

@@ -5,22 +5,14 @@ import com.apps.util.Prompter;
 
 import java.util.*;
 
-public class Board extends Thread{
+public abstract class Board extends Thread{
+
     private final List<Color> colorList = new ArrayList<>();
     private List<Color> playerInput;
     Prompter prompter = new Prompter(new Scanner(System.in));
     private boolean gameOver = false;
 
-    public void display() {
-        getRandomColor();
-        try{
-            Thread.sleep(2000);
-            Console.clear();
-        }
-        catch(InterruptedException ignored) {
-            System.out.println("error");
-        }
-    }
+    public abstract void display();
 
     public List<Color> getRandomColor() {
         int color = new Random().nextInt(Color.values().length);
