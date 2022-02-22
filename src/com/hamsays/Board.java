@@ -11,7 +11,7 @@ public class Board {
     Prompter prompter = new Prompter(new Scanner(System.in));
 
 
-    public void display(){
+    public void display() {
         getRandomColor();
     }
 
@@ -38,7 +38,7 @@ public class Board {
                         "that were displayed: ", "(G|g|R|r|B|b|Y|y)*",
                 error);
 
-        char [] color = colors.toUpperCase().toCharArray();
+        char[] color = colors.toUpperCase().toCharArray();
 
         for (char c : color) {
             switch (c) {
@@ -58,21 +58,27 @@ public class Board {
                     break;
             }
         }
-        System.out.println(playerInput);
         return playerInput;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(colorList, playerInput);
-    }
-    @Override
-    public boolean equals(Object obj){
-        boolean result = false;
-        if(obj instanceof Color){
-            result = Objects.equals(colorList, playerInput);
-        }
-        return result;
-    }
+    public void gameSequence() {
+        boolean gameOver = false;
+        int incorrect = 0;
+        int correct = 0;
 
+        display();
+        promptForColor();
+
+        while (!gameOver) {
+            if (colorList.equals(playerInput)) {
+                display();
+                promptForColor();
+            }
+            else{
+                gameOver = true;
+                System.out.println("Sorry Game over");
+                }
+            }
+
+        }
 }
