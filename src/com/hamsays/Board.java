@@ -1,18 +1,25 @@
 package com.hamsays;
 
+import com.apps.util.Console;
 import com.apps.util.Prompter;
 
 import java.util.*;
 
-public class Board {
+public class Board extends Thread{
     private List<Player> player;
     private final List<Color> colorList = new ArrayList<>();
     private List<Color> playerInput;
     Prompter prompter = new Prompter(new Scanner(System.in));
 
-
     public void display() {
         getRandomColor();
+        try{
+            Thread.sleep(2000);
+            Console.clear();
+        }
+        catch(InterruptedException ignored) {
+            System.out.println("error");
+        }
     }
 
     //Aaron
@@ -74,11 +81,22 @@ public class Board {
                 display();
                 promptForColor();
             }
-            else{
+            else {
                 gameOver = true;
                 System.out.println("Sorry Game over");
-                }
             }
-
         }
+    }
+//    @Override
+//    public void run() {
+//        for (int i = 0; i < 10; i++) {
+//            try{
+//                Thread.sleep(20000);
+//                Console.clear();
+//            }
+//            catch(InterruptedException ignored) {
+//                System.out.println("error");
+//            }
+//        }
+//    }
 }
