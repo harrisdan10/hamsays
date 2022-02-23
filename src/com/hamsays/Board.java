@@ -17,12 +17,10 @@ public abstract class Board extends Thread{
     public abstract void display();
 
     void getRandomColor() {
-        synchronized (this) {
             int color = new Random().nextInt(Color.values().length);
             Color newColor = Color.values()[color];
             colorList.add(newColor);
             System.out.println(colorList);
-        }
     }
 
      void promptForColor() {
