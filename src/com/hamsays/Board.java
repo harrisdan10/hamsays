@@ -6,23 +6,23 @@ import com.apps.util.Prompter;
 import java.util.*;
 
 public abstract class Board extends Thread{
-
     private final List<Color> colorList = new ArrayList<>();
     private List<Color> playerInput;
-    Prompter prompter = new Prompter(new Scanner(System.in));
     private boolean gameOver = false;
+    Prompter prompter = new Prompter(new Scanner(System.in));
 
     public abstract void display();
 
-    public List<Color> getRandomColor() {
-        int color = new Random().nextInt(Color.values().length);
-        Color newColor = Color.values()[color];
-        colorList.add(newColor);
-        System.out.println(colorList);
-        return colorList;
+    void getRandomColor() {
+        synchronized (this) {
+            int color = new Random().nextInt(Color.values().length);
+            Color newColor = Color.values()[color];
+            colorList.add(newColor);
+            System.out.println(colorList);
+        }
     }
 
-    public List<Color> promptForColor() {
+    private void promptForColor() {
         playerInput = new ArrayList<>();
 
         String error = "Please choose between one of the four colors: "
@@ -37,8 +37,8 @@ public abstract class Board extends Thread{
 
         char[] color = colors.toUpperCase().toCharArray();
 
-        for (char c : color) {
-            switch (c) {
+        for (char currentColor : color) {
+            switch (currentColor) {
                 case 'G':
                     playerInput.add(Color.GREEN);
                     break;
@@ -55,30 +55,27 @@ public abstract class Board extends Thread{
                     break;
             }
         }
-        return playerInput;
     }
 
     public void gameSequence() {
-        int correctCount = 0;
-
-        display();
-        promptForColor();
-
-        while (!gameOver) {
-            if (colorList.equals(playerInput)) {
-                correctCount++;
-                if (correctCount == 10) {
-                    gameOver = true;
-                    System.out.println("Good Job you got all " + correctCount + " correct");
+            int correctCount = 0;
+            display();
+            promptForColor();
+            while (!gameOver) {
+                if (colorList.equals(playerInput)) {
+                    correctCount++;
+                    if (correctCount == 10) {
+                        gameOver = true;
+                        System.out.println("Good Job you got all " + correctCount + " correct");
+                    } else {
+                        display();
+                        promptForColor();
+                    }
                 } else {
-                    display();
-                    promptForColor();
+                    gameOver = true;
+                    Console.clear();
+                    System.out.println("Sorry Game over, you got " + correctCount + " correct.");
                 }
-            } else {
-                gameOver = true;
-                Console.clear();
-                System.out.println("Sorry Game over, you got " + correctCount + " correct." );
             }
         }
-    }
 }

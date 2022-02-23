@@ -41,10 +41,12 @@ public class HAMApp{
 
     private Difficulty promptForDifficulty() {
         String difficulty = prompter.prompt("Please choose from one of the following difficulties: " +
-                "[E]asy, [M]edium, [H]ard: ", "E|M|H", "Please choose a valid difficulty " +
-                "level: [E]asy, [M]edium, [H]ard");
+                "[E]asy, [M]edium, [H]ard: ", "E|e|M|m|H|h", "Please choose a valid difficulty " +
+                "level: [E]asy, [M]edium, or [H]ard");
 
-        switch(difficulty) {
+        String inputConversion = difficulty.toUpperCase();
+
+        switch(inputConversion) {
             case "E":
                 level = Difficulty.EASY;
                 break;
@@ -62,6 +64,6 @@ public class HAMApp{
 
     private void startGame() {
         board.gameSequence();
-
     }
+
 }
