@@ -1,3 +1,3 @@
 @echo off
 
-java -classpath lib\app-utils-1.1.jar;out\production\hamsays com.hamsays.client.Main
+java -classpath hamsays-1.0.jar;lib\app-utils-1.1.jar; com.hamsays.client.Main
