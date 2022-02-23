@@ -6,6 +6,10 @@ import com.hamsays.Board;
 import com.hamsays.BoardFactory;
 import com.hamsays.Difficulty;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -14,7 +18,7 @@ public class HAMApp{
     private Difficulty level;
     Prompter prompter = new Prompter(new Scanner(System.in));
     
-    public void execute() {
+    public void execute () {
         welcome();
         promptForName();
         Difficulty level = promptForDifficulty();
@@ -25,11 +29,17 @@ public class HAMApp{
 
     private void welcome() {
         Console.blankLines(2);
-        System.out.println("o       o o--o o      o-o  o-o  o   o o--o     o-O-o  o-o      o  o   O  o   o      o-o    O  o   o  o-o\n" +
-                "|       | |    |     /    o   o |\\ /| |          |   o   o     |  |  / \\ |\\ /|     |      / \\  \\ /  |\n" +
-                "o   o   o O-o  |    O     |   | | O | O-o        |   |   |     O--O o---o| O |      o-o  o---o  O    o-o\n" +
-                " \\ / \\ /  |    |     \\    o   o |   | |          |   o   o     |  | |   ||   |         | |   |  |       |\n" +
-                "  o   o   o--o O---o  o-o  o-o  o   o o--o       o    o-o      o  o o   oo   o     o--o  o   o  o   o--o");
+
+        try {
+            List<String> lines = Files.readAllLines(Path.of("data/welcome.txt"));
+            for (String line : lines)
+            {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
         Console.blankLines(2);
     }
 
