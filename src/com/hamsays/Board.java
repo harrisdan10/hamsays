@@ -7,7 +7,7 @@ import java.util.*;
 
 public abstract class Board extends Thread{
     private final List<Color> colorList = new ArrayList<>();
-    private List<Color> playerInput;
+    private List<Color> playerColorInput;
     private boolean gameOver = false;
     Prompter prompter = new Prompter(new Scanner(System.in));
 
@@ -22,9 +22,7 @@ public abstract class Board extends Thread{
         }
     }
 
-    private void promptForColor() {
-        playerInput = new ArrayList<>();
-
+     void promptForColor() {
         String error = "Please choose between one of the four colors: "
                 + "[" + Color.BLUE + ", "
                 + Color.RED + ","
@@ -35,34 +33,15 @@ public abstract class Board extends Thread{
                         "that were displayed: ", "(G|g|R|r|B|b|Y|y)*",
                 error);
 
-        char[] color = colors.toUpperCase().toCharArray();
-
-        for (char currentColor : color) {
-            switch (currentColor) {
-                case 'G':
-                    playerInput.add(Color.GREEN);
-                    break;
-                case 'R':
-                    playerInput.add(Color.RED);
-                    break;
-                case 'B':
-                    playerInput.add(Color.BLUE);
-                    break;
-                case 'Y':
-                    playerInput.add(Color.YELLOW);
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
+         addToPlayerColorInput(colors);
+     }
 
     public void gameSequence() {
             int correctCount = 0;
             display();
             promptForColor();
             while (!gameOver) {
-                if (colorList.equals(playerInput)) {
+                if (colorList.equals(playerColorInput)) {
                     correctCount++;
                     if (correctCount == 10) {
                         gameOver = true;
@@ -78,4 +57,28 @@ public abstract class Board extends Thread{
                 }
             }
         }
+
+    private void addToPlayerColorInput(String colors) {
+        playerColorInput = new ArrayList<>();
+        char[] color = colors.toUpperCase().toCharArray();
+
+        for (char currentColor : color) {
+            switch (currentColor) {
+                case 'G':
+                    playerColorInput.add(Color.GREEN);
+                    break;
+                case 'R':
+                    playerColorInput.add(Color.RED);
+                    break;
+                case 'B':
+                    playerColorInput.add(Color.BLUE);
+                    break;
+                case 'Y':
+                    playerColorInput.add(Color.YELLOW);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }

@@ -31,11 +31,8 @@ public class HAMApp{
         Console.blankLines(2);
 
         try {
-            List<String> lines = Files.readAllLines(Path.of("data/welcome.txt"));
-            for (String line : lines)
-            {
-                System.out.println(line);
-            }
+            String line = Files.readString(Path.of("data/welcome.txt"));
+            System.out.println("\u001B[31m" + line + "\u001B[37m");
         } catch (IOException e) {
             System.out.println(e);
         }
