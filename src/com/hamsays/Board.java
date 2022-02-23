@@ -3,6 +3,9 @@ package com.hamsays;
 import com.apps.util.Console;
 import com.apps.util.Prompter;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 public abstract class Board extends Thread{
@@ -29,8 +32,7 @@ public abstract class Board extends Thread{
                 + Color.GREEN + ","
                 + Color.YELLOW + "]";
 
-        String colors = prompter.prompt("Please enter the color(s) " +
-                        "that were displayed: ", "(G|g|R|r|B|b|Y|y)*",
+        String colors = prompter.prompt("HAM Says the color sequence was? ", "(G|g|R|r|B|b|Y|y)*",
                 error);
 
          addToPlayerColorInput(colors);
@@ -45,6 +47,14 @@ public abstract class Board extends Thread{
                     correctCount++;
                     if (correctCount == 10) {
                         gameOver = true;
+                        Console.clear();
+                        Console.blankLines(2);
+                        try {
+                            String line = Files.readString(Path.of("data/win.txt"));
+                            System.out.println("\u001B[32m" + line + "\u001B[37m");
+                        } catch (IOException e) {
+                            System.out.println(e);
+                        }
                         System.out.println("Good Job you got all " + correctCount + " correct");
                     } else {
                         display();
@@ -53,6 +63,13 @@ public abstract class Board extends Thread{
                 } else {
                     gameOver = true;
                     Console.clear();
+                    Console.blankLines(2);
+                    try {
+                        String line = Files.readString(Path.of("data/lose.txt"));
+                        System.out.println("\u001B[31m" + line + "\u001B[37m");
+                    } catch (IOException e) {
+                        System.out.println(e);
+                    }
                     System.out.println("Sorry Game over, you got " + correctCount + " correct.");
                 }
             }
