@@ -41,7 +41,7 @@ public class HAMApp{
     }
 
     private String promptForName() {  //what will we do with name?
-        String name = prompter.prompt("What are you initials? up to 3 only please: ",
+        String name = prompter.prompt("What are your initials? up to 3 only please: ",
                 "[a-zA-Z]{1,3}", "Please restrict name input to alphabetical characters and a limit of 3");
         return name;
     }

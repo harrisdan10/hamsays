@@ -70,7 +70,7 @@ public abstract class Board extends Thread{
                     } catch (IOException e) {
                         System.out.println(e);
                     }
-                    System.out.println("Sorry Game over, you got " + correctCount + " correct.");
+                    System.out.println("Sorry, you lose. You got " + correctCount + " correct.");
                 }
             }
         }
