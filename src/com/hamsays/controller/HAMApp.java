@@ -23,6 +23,7 @@ public class HAMApp{
         promptForName();
         Difficulty level = promptForDifficulty();
         board = BoardFactory.createBoard(level);
+        Console.clear();
         startGame();
     }
 
@@ -32,22 +33,21 @@ public class HAMApp{
 
         try {
             String line = Files.readString(Path.of("data/welcome.txt"));
-            System.out.println("\u001B[31m" + line + "\u001B[37m");
+            System.out.println("\u001B[34m" + line + "\u001B[37m");
         } catch (IOException e) {
             System.out.println(e);
         }
-
         Console.blankLines(2);
     }
 
     private String promptForName() {  //what will we do with name?
-        String name = prompter.prompt("Please enter your name: ",
-                "[a-zA-Z]*( [a-zA-Z]*)?", "Please restrict name input to alphabetical characters");
+        String name = prompter.prompt("What are you initials? up to 3 only please: ",
+                "[a-zA-Z]{1,3}", "Please restrict name input to alphabetical characters and a limit of 3");
         return name;
     }
 
     private Difficulty promptForDifficulty() {
-        String difficulty = prompter.prompt("Please choose from one of the following difficulties: " +
+        String difficulty = prompter.prompt("What difficulty would you like to play? " +
                 "[E]asy, [M]edium, [H]ard: ", "E|e|M|m|H|h", "Please choose a valid difficulty " +
                 "level: [E]asy, [M]edium, or [H]ard");
 
