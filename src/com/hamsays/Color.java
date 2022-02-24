@@ -1,6 +1,5 @@
 package com.hamsays;
 
-// Michael
 public enum Color {
     GREEN("\u001B[32m" + "GREEN" + "\u001B[37m"),
     RED("\u001B[31m" + "RED" + "\u001B[37m"),

@@ -11,7 +11,7 @@ import java.util.*;
 public abstract class Board extends Thread {
     private final List<Color> colorList = new ArrayList<>();
     private List<Color> playerColorInput;
-    public boolean gameOver = false;
+    private boolean gameOver = false;
     Prompter prompter = new Prompter(new Scanner(System.in));
 
     public abstract void display();
