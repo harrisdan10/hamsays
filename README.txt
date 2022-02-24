@@ -25,4 +25,10 @@ For Mac:
 3. There will be a list of colors displayed for a short moment.
 4. Player will be asked to input colors shown, in the order they were shown ([R]ed, [G]reen, [Y]ellow, [B]lue). 
 5. If correct, the difficulty will increase with each stage progression until winning the game.
-6. If incorrect, the game is over. 
+6. If incorrect, the game is over.
+
+// Troubleshooting //
+- On Mac, if you're having machine permissions issues, input the following command into your terminal:
+		chmod +x ./run.sh
+
+- This will rectify any permissions issues your specific machine is having.
